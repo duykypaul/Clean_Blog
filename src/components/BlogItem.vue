@@ -19,6 +19,8 @@
 </template>
 
 <script>
+	import {formatDate} from "../helpers";
+	
 	export default {
 		name: "blog-item",
 		props: {
@@ -26,19 +28,7 @@
 		},
 		computed: {
 			formatDate() {
-				let date = this.blog.created_at;
-				let monthNames = [
-					"January", "February", "March",
-					"April", "May", "June", "July",
-					"August", "September", "October",
-					"November", "December"
-				];
-				
-				let day = date.getDate();
-				let monthIndex = date.getMonth();
-				let year = date.getFullYear();
-				
-				return day + ' ' + monthNames[monthIndex] + ' ' + year;
+				return formatDate(this.blog.created_at);
 			},
 			formatTitle(){
 				return this.blog.title.replace('.', '').split(' ').join('-').toLowerCase();

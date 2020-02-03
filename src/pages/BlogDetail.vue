@@ -3,12 +3,12 @@
 		<page-header
 			className="post-heading"
 			urlBg="/dist/img/post-bg.jpg"
-			title="Man must explore, and this is exploration at its greatest"
-			subHeading="Problems look mighty small from 150 miles up"
+			:title="getBlogCurrent.title"
+			:subHeading="getBlogCurrent.summary"
 		>
 			<span class="meta">Posted by
               <a href="#">Start Bootstrap</a>
-              on August 24, 2019</span>
+              on {{formatDate}}</span>
 		</page-header>
 		<div class="container">
 			<article>
@@ -88,10 +88,29 @@
 
 <script>
 	import PageHeader from "../components/PageHeader";
-	
+	import blogList from "../mocks/blogs";
+	import {formatDate} from "../helpers";
 	export default {
 		name: "blog-detail",
-		components: {PageHeader}
+		components: {PageHeader},
+		data(){
+			return{
+				// blogList: blogList,
+				currentId: 0
+			}
+		},
+		
+		created() {
+			this.currentId = this.$route.params.id;
+		},
+		computed: {
+			getBlogCurrent(){
+				return blogList[blogList.findIndex(item => item.id === this.currentId)];
+			},
+			formatDate(){
+				return formatDate(this.getBlogCurrent.created_at);
+			}
+		}
 	}
 </script>
 
