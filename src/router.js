@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from "vue-router";
+import store from "./store";
+
 import HomePage from "./pages/HomePage";
 import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
-import BlogList from "./components/BlogList";
 import BlogDetail from "./pages/BlogDetail";
 import Login from "./pages/Login";
 
@@ -28,7 +29,15 @@ const routes = [
 	{
 		path: '/blog-detail/:title?.:id?',
 		name: 'blog-detail',
-		component: BlogDetail
+		component: BlogDetail,
+		beforeEnter: (to, from, next) => {
+			if(store.state.isLogin){
+				next();
+			} else {
+				next({path: '/login', query: {redirect: from.name}});
+			}
+			
+		}
 	},
 	{
 		path: '/login',
