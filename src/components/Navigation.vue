@@ -9,18 +9,17 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item">
-						<router-link to="/" tag="a" class="nav-link" exact-active-class="active" >Home</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/about-us" tag="a" class="nav-link" exact-active-class="active">About Us</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/blog-detail/:title?.:id?" tag="a" class="nav-link" exact-active-class="active">Blogs</router-link>
-					</li>
-					<li class="nav-item">
-						<router-link to="/contact" tag="a" class="nav-link" exact-active-class="active">Contact</router-link>
-					</li>
+					<router-link
+							v-for="item in linkList"
+							:key="item.to"
+							tag="li"
+							:to="item.to"
+							exact-active-class="item.exactActiveClass"
+							class="nav-item"
+							activeClass=""
+					>
+						<a class="nav-link" >{{item.text}}</a>
+					</router-link>
 				</ul>
 			</div>
 		</div>
@@ -29,7 +28,18 @@
 
 <script>
 	export default {
-		name: "navigation"
+		name: "navigation",
+		data(){
+			return {
+				linkList: [
+					{to: '/', text: 'Home', exactActiveClass: 'active'},
+					{to: 'about-us', text: 'About Us', exactActiveClass: 'active'},
+					{to: '/contact', text: 'Contact', exactActiveClass: 'active'},
+					{to: '/login', text: 'Login', exactActiveClass: 'active'},
+				]
+			}
+		}
+		
 	}
 </script>
 

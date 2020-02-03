@@ -5,6 +5,7 @@ import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import BlogList from "./components/BlogList";
 import BlogDetail from "./pages/BlogDetail";
+import Login from "./pages/Login";
 
 Vue.use(VueRouter);
 
@@ -28,6 +29,11 @@ const routes = [
 		path: '/blog-detail/:title?.:id?',
 		name: 'blog-detail',
 		component: BlogDetail
+	},
+	{
+		path: '/login',
+		name: 'login',
+		component: Login
 	}
 ];
 const router = new VueRouter({
